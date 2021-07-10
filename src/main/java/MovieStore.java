@@ -1,18 +1,24 @@
 import java.util.LinkedList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
-
 public class MovieStore {
+    interface Predicate {
+        boolean matches(Movie movie);
+    }
+
     List<Movie> movies = new LinkedList<Movie>();
     public List<Movie> findByPartialTitle(final String partialTitle) {
         List<Movie> result = new LinkedList<Movie>();
+        /*
         Predicate predicate = new Predicate() {
             public boolean matches(Movie movie) {
                 return movie.title().toUpperCase().contains(partialTitle.toUpperCase());
             }
         };
-        return getMovies(result, predicate);
+        */
+        // Using Lambda expression to implement predicate interface
+        return getMovies(result, (Movie movie)-> movie.title().toUpperCase().contains(partialTitle.toUpperCase()));
+        // return getMovies(result, predicate);
     }
 
     private List<Movie> getMovies(List<Movie> result, Predicate predicate) {
@@ -35,7 +41,7 @@ public class MovieStore {
                 return movie.director().toUpperCase().contains(partialDirector.toUpperCase());
             }
         };
-        return getMovies(result, predicate);
+        return getMovies(result, (Movie movie) -> movie.director().toUpperCase().contains(partialDirector.toUpperCase()));
     }
 
     public List<Movie> findByReleaseYear(final int from, final int to) {
@@ -46,10 +52,8 @@ public class MovieStore {
             }
         };
 
-        return getMovies(result, predicate);
+        return getMovies(result, (Movie movie) -> movie.releaseYear() >= from && movie.releaseYear() <= to);
     }
 
-    interface Predicate {
-        boolean matches(Movie movie);
-    }
+
 }
