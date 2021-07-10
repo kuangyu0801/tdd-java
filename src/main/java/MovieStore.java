@@ -7,12 +7,17 @@ public class MovieStore {
     List<Movie> movies = new LinkedList<Movie>();
     public List<Movie> findByPartialTitle(final String partialTitle) {
         List<Movie> result = new LinkedList<Movie>();
+        Predicate predicate = new Predicate() {
+            public boolean matches(Movie movie) {
+                return movie.title().toUpperCase().contains(partialTitle.toUpperCase());
+            }
+        };
+        return getMovies(result, predicate);
+    }
+
+    private List<Movie> getMovies(List<Movie> result, Predicate predicate) {
         for (Movie movie : movies) {
-            if (new Predicate() {
-                public boolean matches(Movie movie) {
-                    return movie.title().toUpperCase().contains(partialTitle.toUpperCase());
-                }
-            }.matches(movie)) {
+            if (predicate.matches(movie)) {
                 result.add(movie);
             }
         }
@@ -25,30 +30,23 @@ public class MovieStore {
 
     public List<Movie> findByPartialDirector(final String partialDirector) {
         List<Movie> result = new LinkedList<Movie>();
-        for (Movie movie : movies) {
-            if (new Predicate() {
-                public boolean matches(Movie movie) {
-                    return movie.director().toUpperCase().contains(partialDirector.toUpperCase());
-                }
-            }.matches(movie)) {
-                result.add(movie);
+        Predicate predicate =  new Predicate() {
+            public boolean matches(Movie movie) {
+                return movie.director().toUpperCase().contains(partialDirector.toUpperCase());
             }
-        }
-        return result;
+        };
+        return getMovies(result, predicate);
     }
 
     public List<Movie> findByReleaseYear(final int from, final int to) {
         List<Movie> result = new LinkedList<Movie>();
-        for (Movie movie : movies) {
-            if (new Predicate() {
-                public boolean matches(Movie movie) {
-                    return movie.releaseYear() >= from && movie.releaseYear() <= to;
-                }
-            }.matches(movie)) {
-                result.add(movie);
+        Predicate predicate = new Predicate() {
+            public boolean matches(Movie movie) {
+                return movie.releaseYear() >= from && movie.releaseYear() <= to;
             }
-        }
-        return result;
+        };
+
+        return getMovies(result, predicate);
     }
 
     interface Predicate {
