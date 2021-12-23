@@ -30,3 +30,8 @@
     -
   - 
 Node vs Element vs Document
+  
+Java IO
+- https://www.baeldung.com/java-write-xml-document-file
+- File
+- FileWriter
