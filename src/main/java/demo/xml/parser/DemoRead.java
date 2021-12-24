@@ -18,7 +18,7 @@ public class DemoRead {
     public static void main(String[] args){
         logger.info("Info log message {}" , 10);
         try {
-            File inputFile = new File("src/main/resources/input.txt");
+            File inputFile = new File("src/main/resources/read-input.txt");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
