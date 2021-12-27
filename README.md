@@ -6,6 +6,7 @@
     - Logging
     - XML DOM
 - http://hamcrest.org/JavaHamcrest/index
+  - http://hamcrest.org/JavaHamcrest/tutorial
 - udemy course: https://www.udemy.com/course/learn-tdd-in-java/
 - 黑馬xml: https://www.bilibili.com/video/BV1R54y1q79z/
 
@@ -27,8 +28,8 @@
     - 本文
       - CDATA: <![CDATA[ *contnet* ]]>
   - 約束
-    -
-  - 
+    
+
 Node vs Element vs Document
   
 Java IO
